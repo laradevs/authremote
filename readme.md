@@ -26,7 +26,7 @@ Next, You must register the service provider (optional) :
 Next, you must publish the configuration file to define the OAUTH server credentials:
 
 ```bash
-php artisan vendor:publish --provider="LaraDevs\AuthRemote\RestUserServiceProvider"
+php artisan vendor:publish --provider="LaraDevs\AuthRemote\MainServiceProvider"
 ```
 
 This is the contents of the published file :
