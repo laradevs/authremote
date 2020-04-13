@@ -52,7 +52,7 @@ USER_PROVIDER_REST_URL=putYourRestURL
 
 ```php
 'laravelpassport' => [
-        'client_id' => env('LARAVELPASSPORT_KEY'),
+        'client_id' => env('LARAVELPASSPORT_KEY','http://YOUR_ROUTE_HOST_SERVER/api/user'),
         'client_secret' => env('LARAVELPASSPORT_SECRET'),
         'redirect' => env('LARAVELPASSPORT_REDIRECT_URI'),
         'host'=> env('LARAVELPASSPORT_HOST')
@@ -80,4 +80,11 @@ USER_PROVIDER_REST_URL=putYourRestURL
 Route::get('/auth-remote/{provider}', '\LaraDevs\AuthRemote\ActionsController@redirectToProvider')->name('laravel_passport');
 Route::get('/auth-remote/{provider}/callback', '\LaraDevs\AuthRemote\ActionsController@handleProviderCallback');
 Route::post('/auth-remote-logout','\LaraDevs\AuthRemote\ActionsController@logout')->name('laravel_passport.logout');
+```
+
+### Add route name for initial route 
+```php
+Route::get('/', function () {
+    return view('welcome');
+})->name(config('rest-provider.route_not_session'));
 ```
