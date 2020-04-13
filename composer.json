@@ -1,0 +1,41 @@
+{
+    "authors": [
+        {
+            "name": "Ernesto G. Liberio Vera",
+            "email": "ernesto.liberio@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LaraDevs\\AuthRemote\\": "src/"
+        }
+    },
+    "description": "It is a component that allows to carry out and manage the authentication control through OAUTH2.0 for a Laravel application.",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MainServiceProvider"
+            ]
+        }
+    },
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "name": "laradevs/authremote",
+    "require": {
+        "php": ">=7.2",
+        "illuminate/support": "^5.8|6.*|7.*",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.5",
+        "socialiteproviders/laravelpassport": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "orchestra/testbench": "^3.5|^4.0|^5.0|^6.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaraDevs\\AuthRemote\\Test\\": "tests/"
+        }
+    }
+}
