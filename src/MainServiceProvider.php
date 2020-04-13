@@ -3,6 +3,7 @@
 
 namespace LaraDevs\AuthRemote;
 
+use Illuminate\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
 use LaraDevs\AuthRemote\ServiceProviders\RouteServiceProvider;
 use SocialiteProviders\LaravelPassport\LaravelPassportExtendSocialite;
@@ -10,21 +11,11 @@ use SocialiteProviders\Manager\SocialiteWasCalled;
 
 class MainServiceProvider extends ServiceProvider
 {
-    /**
-     * The event listener mappings for the application.
-     *
-     * @var array
-     */
-    protected $listen = [
-        SocialiteWasCalled::class => [
-            LaravelPassportExtendSocialite::class
-        ]
-    ];
 
     /**
      * void
      */
-    public function boot()
+    public function boot(Dispatcher $events)
     {
         $this->publishes([
             __DIR__ . '/../config/rest-provider.php' => config_path('rest-provider.php'),
@@ -41,6 +32,7 @@ class MainServiceProvider extends ServiceProvider
             }
         );
         $this->app->register(RouteServiceProvider::class);
+        $events->listen(\SocialiteProviders\Manager\SocialiteWasCalled::class,\SocialiteProviders\LaravelPassport\LaravelPassportExtendSocialite::class);
     }
 
     /**
@@ -58,7 +50,7 @@ class MainServiceProvider extends ServiceProvider
      */
     private function addAuthorizationToken(array $appConfig)
     {
-        $token = session()->get($appConfig['name_session_rest']);
+        $token = session()->get($appConfig['name_session_rest'],'NONE');
         if (is_null($token)) {
             throw new RestException('Empty token in session.');
         }

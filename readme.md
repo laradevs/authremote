@@ -58,6 +58,12 @@ USER_PROVIDER_REST_URL=putYourRestURL
         'host'=> env('LARAVELPASSPORT_HOST')
     ]
 ```
+### Add in Handle Exception in method render
+```php
+ if ($exception instanceof \LaraDevs\AuthRemote\RestException) {
+            return redirect()->route(config('rest-provider.route_not_session'));
+ }
+```
 ### Add in Array Auth
 ```php
   'providers' => [
